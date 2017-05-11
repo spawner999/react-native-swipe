@@ -1,13 +1,40 @@
 import Expo from 'expo';
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
+import { Card, Button } from 'react-native-elements';
+
+import Deck from './src/Deck';
+import DATA from './mocks/data';
+
+// TODO this better be a component
+function renderCard(item) {
+  const { id, text, uri } = item;
+  return (
+    <Card
+      key={id}
+      title={text}
+      image={{ uri }}
+    >
+      <Text style={{ marginBottom: 10 }}>
+        Lorem ipsum.
+      </Text>
+      <Button
+        icon={{ name: 'code' }}
+        backgroundColor="#03a9f4"
+        title="View Now"
+      />
+    </Card>
+  );
+}
 
 class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>hello mobile world</Text>
-        <Text style={styles.text}>we now have a linter</Text>
+        <Deck
+          data={DATA}
+          renderCard={renderCard}
+        />
       </View>
     );
   }
@@ -16,12 +43,7 @@ class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'teal',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    color: 'white'
+    backgroundColor: 'teal'
   }
 });
 
